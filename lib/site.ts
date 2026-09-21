@@ -11,7 +11,7 @@ export const site = {
   hoursWeek: 'Monday to Saturday, 7:00am – 8:00pm',
   hoursSunday: 'Sunday and public holidays, emergency call-outs only',
   payment:
-    'Payment is made as a 40% deposit after site inspection, remaining balance after the work is completed.',
+    'Payment is made as a 40% deposit after site inspection, remaining amount after the work is completed.',
   licence: 'Technicians licensed by the Pest Control Products Board (PCPB)',
 };
 
