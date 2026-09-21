@@ -1,37 +1,176 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------
+   Safeguard design tokens
+   Palette: disinfected chalk, deep pine, field green, hazard amber.
+   No gradients anywhere. Flat fills, hairline ink rules, tiny radii.
+---------------------------------------------------------------- */
 :root {
-  --background: #f6f3eb;
-  --foreground: #0f172a;
+  --chalk: #ecefe9;
+  --chalk-deep: #e0e5dd;
+  --paper: #ffffff;
+  --ink: #10201a;
+  --ink-soft: #4a5a52;
+  --pine: #0e3b2e;
+  --pine-deep: #092b21;
+  --field: #2f7d53;
+  --hazard: #f2a413;
+  --signal: #c03221;
+  --rule: rgba(16, 32, 26, 0.14);
+  --rule-strong: rgba(16, 32, 26, 0.32);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-chalk: var(--chalk);
+  --color-chalk-deep: var(--chalk-deep);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-pine: var(--pine);
+  --color-pine-deep: var(--pine-deep);
+  --color-field: var(--field);
+  --color-hazard: var(--hazard);
+  --color-signal: var(--signal);
+  --color-rule: var(--rule);
+
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-xs: 3px;
+  --radius-sm: 5px;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--chalk);
+  color: var(--ink);
+  font-family: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "ss01", "cv01";
+  -webkit-font-smoothing: antialiased;
 }
 
-* {
-  box-sizing: border-box;
+h1,
+h2,
+h3,
+.display {
+  font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.028em;
+  line-height: 1.02;
+  text-wrap: balance;
 }
 
-a {
-  text-decoration: none;
+p {
+  text-wrap: pretty;
 }
 
-button {
-  cursor: pointer;
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 3px solid var(--hazard);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Subject-grounded device: pest control warning tape ---------- */
+.tape {
+  height: 10px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--hazard) 0 14px,
+    var(--ink) 14px 28px
+  );
+}
+.tape-thin {
+  height: 5px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--hazard) 0 9px,
+    transparent 9px 18px
+  );
+}
+
+/* --- Structural helpers ----------------------------------------- */
+.rule-t {
+  border-top: 1px solid var(--rule);
+}
+.rule-b {
+  border-bottom: 1px solid var(--rule);
+}
+.stack-shadow {
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+.stack-shadow-sm {
+  box-shadow: 3px 3px 0 0 var(--ink);
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+@media (min-width: 1024px) {
+  .wrap {
+    padding-inline: 40px;
+  }
+}
+
+.measure {
+  max-width: 62ch;
+}
+
+/* Numerals in price tables line up */
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- One orchestrated page-load reveal, hero only ---------------- */
+@keyframes lift {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.lift {
+  animation: lift 0.55s cubic-bezier(0.22, 0.75, 0.3, 1) both;
+}
+.lift-1 { animation-delay: 0.05s; }
+.lift-2 { animation-delay: 0.14s; }
+.lift-3 { animation-delay: 0.23s; }
+.lift-4 { animation-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .lift,
+  .lift-1,
+  .lift-2,
+  .lift-3,
+  .lift-4 {
+    animation: none;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Native select arrow removal without losing the control */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%),
+    linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(50% + 2px),
+    calc(100% - 14px) calc(50% + 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
 }
