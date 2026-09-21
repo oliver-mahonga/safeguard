@@ -1,97 +1,97 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import SiteShell from '../components/site-shell';
+import SiteShell from '@/components/site-shell';
+import { Button, CallButton, Money, SectionHead, WhatsAppButton } from '@/components/ui';
+import { pestIcons } from '@/components/icons';
+import { services } from '@/lib/site';
 
-const serviceList = [
-  {
-    title: 'Residential Fumigation',
-    icon: '🏠',
-    description: 'Safe and effective removal of cockroaches from homes, apartments, and family spaces with long-term protection.',
-    includes: ['Inspection', 'Targeted treatment', 'Follow-up guidance'],
-  },
-  {
-    title: 'Commercial Pest Control',
-    icon: '🏢',
-    description: 'Rapid response for offices, retail stores, hotels, and restaurants that need compliant, low-disruption treatment.',
-    includes: ['Facility audit', 'Commercial plan', 'Compliance support'],
-  },
-  {
-    title: 'Deep Cleaning & Prevention',
-    icon: '🧼',
-    description: 'Sanitation and prevention services designed to eliminate food sources and hidden nesting areas.',
-    includes: ['Sanitization', 'Crack sealing', 'Preventive checks'],
-  },
-  {
-    title: 'Maintenance Contracts',
-    icon: '🛡️',
-    description: 'Scheduled protection plans to keep your property safe all year and detect any new activity early.',
-    includes: ['Quarterly visits', 'Monitoring logs', 'Priority assistance'],
-  },
-];
+export const metadata: Metadata = {
+  title: 'Fumigation and pest control services in Nairobi',
+  description:
+    'Cockroach, bedbug, rodent, termite, mosquito and flea treatment for homes and businesses in Nairobi. Fixed prices from KSh 3,500 with a written warranty.',
+};
 
 export default function ServicesPage() {
   return (
     <SiteShell>
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">Our solutions</p>
-          <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">Fumigation services designed to protect every space.</h1>
-          <p className="mt-5 text-lg leading-8 text-slate-600">
-            Whether you need fast residential treatment or a year-round commercial protection plan, Safeguard brings professional care and measurable results.
+      <section className="border-b border-rule">
+        <div className="wrap py-14 lg:py-20">
+          <h1 className="max-w-3xl text-[2.6rem] leading-[1] sm:text-[3.4rem]">
+            Every pest has a method. We use the right one.
+          </h1>
+          <p className="measure mt-6 text-[1.08rem] leading-[1.65] text-ink-soft">
+            Spraying everything with one chemical is why infestations come back. Below is what
+            each treatment involves, what it costs and how long it holds.
           </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {serviceList.map((service) => (
-            <article key={service.title} className="rounded-[1.8rem] border border-slate-200 bg-white p-7 shadow-[0_18px_50px_rgba(15,23,42,0.04)]">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-100 to-lime-100 text-3xl shadow-inner shadow-emerald-200/60">
-                {service.icon}
-              </div>
-              <h2 className="mt-5 text-2xl font-bold text-slate-900">{service.title}</h2>
-              <p className="mt-3 text-base leading-8 text-slate-600">{service.description}</p>
-
-              <ul className="mt-6 space-y-3 text-sm text-slate-700">
-                {service.includes.map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-black text-emerald-700">✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+          <div className="mt-8 flex flex-wrap gap-3">
+            <CallButton />
+            <WhatsAppButton />
+          </div>
         </div>
       </section>
 
-      <section className="bg-slate-950 py-20 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-300">What to expect</p>
-              <h2 className="mt-4 text-3xl font-black sm:text-4xl">A clear treatment plan with measurable results.</h2>
-              <div className="mt-8 space-y-5">
-                {[
-                  'Full inspection and risk assessment in every room or work area',
-                  'Tailored fumigation plan based on the type of infestation and property type',
-                  'Follow-up checks and preventive care to stop re-entry before it starts',
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-300">✓</div>
-                    <p className="text-base leading-7 text-slate-200">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+      <div className="wrap py-14 lg:py-20">
+        <div className="grid gap-px border border-rule bg-rule">
+          {services.map((s) => {
+            const Icon = pestIcons[s.icon];
+            return (
+              <article
+                key={s.slug}
+                className="grid gap-6 bg-paper p-7 md:grid-cols-[auto_1fr_auto] md:items-start md:gap-10 md:p-9"
+              >
+                <Icon className="h-10 w-10 text-field" />
 
-            <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-6">
-              <div className="text-sm uppercase tracking-[0.2em] text-emerald-200">Need a custom plan?</div>
-              <div className="mt-4 text-3xl font-black text-white">Speak with our team</div>
-              <p className="mt-3 text-base leading-7 text-slate-300">
-                Tell us about your property, and we’ll recommend the best treatment approach for your situation.
-              </p>
-              <Link href="/contact" className="mt-6 inline-flex rounded-full bg-gradient-to-r from-emerald-500 to-lime-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20">
-                Request a consultation
-              </Link>
-            </div>
+                <div>
+                  <h2 className="text-[1.5rem]">{s.name}</h2>
+                  <p className="measure mt-3 text-[0.98rem] leading-[1.7] text-ink-soft">
+                    {s.summary}
+                  </p>
+                  <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[0.88rem] text-ink">
+                    {s.method.slice(0, 3).map((m) => (
+                      <li key={m} className="flex items-center gap-2">
+                        <span className="h-1.5 w-1.5 bg-hazard" aria-hidden="true" />
+                        {m}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="shrink-0 md:w-48 md:text-right">
+                  <p className="text-[0.85rem] text-ink-soft">From</p>
+                  <p className="display text-[1.7rem]">
+                    <Money value={s.from} />
+                  </p>
+                  <p className="mt-1 text-[0.82rem] text-ink-soft">{s.warranty}</p>
+                  <Link
+                    href={`/services/${s.slug}`}
+                    className="mt-4 inline-flex rounded-xs border border-ink px-5 py-2.5 text-[0.9rem] font-semibold transition-colors hover:bg-ink hover:text-chalk"
+                  >
+                    Read the details
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+
+      <section className="bg-pine text-chalk">
+        <div className="tape" aria-hidden="true" />
+        <div className="wrap grid gap-8 py-16 lg:grid-cols-2 lg:items-center lg:py-20">
+          <SectionHead
+            light
+            title="Not sure which one you need?"
+            lead="Send a photo of what you are seeing, or describe the bites. A technician tells you what it is and what it costs, free."
+          />
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <WhatsAppButton
+              tone="hazard"
+              label="Send a photo on WhatsApp"
+              message="Hi Safeguard, I am sending a photo of what I am seeing at my place. What is it and what will it cost to treat?"
+            />
+            <Button href="/contact" tone="outline" className="border-chalk/40 text-chalk hover:bg-chalk hover:text-ink">
+              Book an inspection
+            </Button>
           </div>
         </div>
       </section>

@@ -1,383 +1,296 @@
 import Link from 'next/link';
-import SiteShell from './components/site-shell';
+import SiteShell from '@/components/site-shell';
+import HeroBooker from '@/components/hero-booker';
+import Faq from '@/components/faq';
+import { Button, CallButton, Money, SectionHead, WhatsAppButton } from '@/components/ui';
+import { Check, Clock, Pin, Shield, pestIcons } from '@/components/icons';
+import { areas, priceTable, services, site, stats, testimonials } from '@/lib/site';
 
-const services = [
-  {
-    title: 'Residential Fumigation',
-    description:
-      'Targeted cockroach elimination for apartments, homes, and family spaces with safe, long-lasting treatment.',
-    accent: 'Home protection',
-  },
-  {
-    title: 'Commercial Pest Control',
-    description:
-      'Hospital-grade treatment plans for restaurants, hotels, supermarkets, and office buildings that need rapid results.',
-    accent: '24/7 compliance',
-  },
-  {
-    title: 'Deep Cleaning & Prevention',
-    description:
-      'Follow-up sanitation and preventive measures to reduce breeding grounds and stop reinfestation before it starts.',
-    accent: 'Prevention focus',
-  },
-  {
-    title: 'Maintenance Packages',
-    description:
-      'Ongoing monitoring visits to protect your property year-round with scheduled inspections and reporting.',
-    accent: 'Continuous care',
-  },
+const promises = [
+  'Written 6-month warranty on cockroach work',
+  'One free follow-up visit included',
+  'Safe for children and pets once the room is aired',
+  'You pay after the job, by M-Pesa or cash',
 ];
 
-const stats = [
-  { value: '12k+', label: 'Properties protected' },
-  { value: '98%', label: 'Satisfaction rate' },
-  { value: '4.9/5', label: 'Client rating' },
-  { value: '24/7', label: 'Emergency response' },
-];
-
-const process = [
-  'Detailed inspection of cockroach hotspots and risk areas',
-  'Custom fumigation and treatment plan with safe product use',
-  'Follow-up monitoring to ensure complete protection',
-];
-
-const features = [
-  'Certified fumigation specialists',
-  'Eco-conscious and family-safe solutions',
-  'Fast response for homes and businesses',
-  'Transparent pricing and no hidden costs',
-  'Discreet treatment for residential spaces',
-  'Multi-site support for commercial clients',
-];
-
-const testimonials = [
+const steps = [
   {
-    quote:
-      'The team arrived on time and eliminated the issue in just one treatment. Our restaurant is finally pest-free and inspection-ready.',
-    name: 'Maya Thompson',
-    role: 'Restaurant Owner',
+    title: 'You call or WhatsApp',
+    body: 'Tell us the pest, the size of the place and your estate. We quote a fixed price on the spot.',
   },
   {
-    quote:
-      'Our apartment had a persistent cockroach problem for months. Safeguard handled it professionally and explained the process clearly.',
-    name: 'Daniel M.',
-    role: 'Homeowner',
+    title: 'We inspect on arrival',
+    body: 'The technician checks harbourages, entry points and damp spots, then confirms the plan before touching anything.',
   },
   {
-    quote:
-      'Their commercial fumigation service gave us peace of mind. The whole process was efficient, clean, and highly professional.',
-    name: 'Alicia Gomez',
-    role: 'Property Manager',
-  },
-];
-
-const packages = [
-  {
-    name: 'Essential Care',
-    price: '$149',
-    description: 'Perfect for small homes and quick treatment needs.',
-    perks: ['1 inspection', 'Targeted treatment', 'Follow-up advice'],
-    featured: false,
+    title: 'Treatment, 1 to 4 hours',
+    body: 'Gel bait, residual spray, traps or soil treatment depending on the pest. You stay out for the airing time we give you.',
   },
   {
-    name: 'BusinessGuard',
-    price: '$399',
-    description: 'Designed for restaurants, shops, and busy commercial spaces.',
-    perks: ['Full property audit', 'Commercial fumigation', 'Reporting & support'],
-    featured: true,
-  },
-  {
-    name: 'Premium Protection',
-    price: '$799',
-    description: 'Advanced prevention for larger spaces and high-risk premises.',
-    perks: ['Deep treatment', 'Multi-zone coverage', 'Quarterly monitoring'],
-    featured: false,
+    title: 'Follow-up and warranty',
+    body: 'A free return visit clears the second hatch. If they come back inside the warranty, so do we.',
   },
 ];
 
 export default function HomePage() {
   return (
     <SiteShell>
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_right,_rgba(16,185,129,0.12),_transparent_35%)]" />
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1.12fr_0.88fr] lg:px-8 lg:py-24">
-          <div className="relative z-10 flex flex-col justify-center">
-            <span className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700">
-              Certified cockroach control
-            </span>
+      {/* Hero ---------------------------------------------------------- */}
+      <section className="relative overflow-hidden border-b border-rule">
+        <div className="wrap grid gap-12 py-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-16 lg:py-20">
+          <div>
+            <p className="lift lift-1 flex items-center gap-2 text-[0.85rem] font-medium text-field">
+              <Shield className="h-4 w-4" />
+              {site.licence}
+            </p>
 
-            <h1 className="max-w-xl text-4xl font-black leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-              Professional fumigation that keeps your property safe and pest-free.
+            <h1 className="lift lift-2 mt-5 text-[2.6rem] leading-[0.98] sm:text-[3.4rem] lg:text-[4.1rem]">
+              Cockroaches, bedbugs and rats, cleared properly the first time.
             </h1>
 
-            <p className="mt-6 max-w-lg text-lg leading-8 text-slate-600">
-              Safeguard delivers reliable cockroach control for homes, businesses, and commercial facilities using proven treatment solutions and continuous protection plans.
+            <p className="lift lift-3 measure mt-6 text-[1.08rem] leading-[1.65] text-ink-soft">
+              Safeguard treats homes, restaurants and offices across Nairobi with registered
+              products, a fixed price agreed on the phone, and a warranty you can hold us to.
+              Call before 3pm and we are usually there the same day.
             </p>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Link href="/contact" className="rounded-full bg-gradient-to-r from-emerald-700 to-lime-500 px-7 py-3.5 text-base font-semibold text-white shadow-xl shadow-emerald-900/15 transition hover:-translate-y-0.5">
-                Schedule inspection
-              </Link>
-              <Link href="/services" className="rounded-full border border-slate-300 bg-white px-7 py-3.5 text-base font-semibold text-slate-800 shadow-sm transition hover:border-emerald-300 hover:text-emerald-700">
-                Explore services
-              </Link>
+            <div className="lift lift-3 mt-8 flex flex-wrap gap-3">
+              <CallButton />
+              <WhatsAppButton />
             </div>
 
-            <div className="mt-10 grid max-w-xl grid-cols-2 gap-4 sm:grid-cols-4">
-              {stats.map((stat) => (
-                <div key={stat.label} className="rounded-2xl border border-slate-200 bg-white/70 p-4 shadow-sm backdrop-blur-sm">
-                  <div className="text-2xl font-black text-emerald-700">{stat.value}</div>
-                  <div className="mt-1 text-xs uppercase tracking-[0.18em] text-slate-500">{stat.label}</div>
-                </div>
+            <ul className="lift lift-4 mt-10 grid gap-3 sm:grid-cols-2">
+              {promises.map((p) => (
+                <li key={p} className="flex items-start gap-2.5 text-[0.95rem] text-ink">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-field" />
+                  {p}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
-          <div className="relative z-10">
-            <div className="relative mx-auto max-w-lg rounded-[2rem] border border-emerald-200/80 bg-white/80 p-4 shadow-[0_30px_80px_rgba(15,23,42,0.12)] backdrop-blur-md">
-              <div className="rounded-[1.6rem] bg-[linear-gradient(135deg,_#0f172a_0%,_#0f766e_38%,_#65a30d_100%)] p-5 text-white">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-xs uppercase tracking-[0.2em] text-emerald-100">Protection plan</div>
-                    <div className="mt-2 text-2xl font-black">Cockroach Shield</div>
-                  </div>
-                  <div className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-emerald-50">Most popular</div>
-                </div>
-
-                <div className="mt-6 space-y-4">
-                  <div className="rounded-2xl bg-white/8 p-4 backdrop-blur-sm">
-                    <div className="flex items-center justify-between text-sm text-emerald-50">
-                      <span>Inspection coverage</span>
-                      <span className="font-bold text-white">Full property</span>
-                    </div>
-                    <div className="mt-3 h-2.5 rounded-full bg-white/10">
-                      <div className="h-2.5 w-[88%] rounded-full bg-gradient-to-r from-lime-300 to-emerald-200" />
-                    </div>
-                  </div>
-
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-2xl bg-slate-950/10 p-4">
-                      <div className="text-3xl font-black">2-4 hrs</div>
-                      <div className="mt-1 text-xs uppercase tracking-[0.18em] text-emerald-50/80">Treatment time</div>
-                    </div>
-                    <div className="rounded-2xl bg-slate-950/10 p-4">
-                      <div className="text-3xl font-black">12 mo</div>
-                      <div className="mt-1 text-xs uppercase tracking-[0.18em] text-emerald-50/80">Protection window</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-5 grid gap-3 rounded-[1.4rem] bg-[#f7f4ed] p-4 text-sm text-slate-700 sm:grid-cols-3">
-                <div className="rounded-2xl bg-white p-3 shadow-sm">
-                  <div className="text-xl">✅</div>
-                  <div className="mt-2 font-semibold text-slate-900">Safe</div>
-                </div>
-                <div className="rounded-2xl bg-white p-3 shadow-sm">
-                  <div className="text-xl">🛡️</div>
-                  <div className="mt-2 font-semibold text-slate-900">Reliable</div>
-                </div>
-                <div className="rounded-2xl bg-white p-3 shadow-sm">
-                  <div className="text-xl">📍</div>
-                  <div className="mt-2 font-semibold text-slate-900">Local</div>
-                </div>
-              </div>
+          <div className="lift lift-4 lg:pt-2">
+            <HeroBooker />
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.85rem] text-ink-soft">
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4 text-field" />
+                Same-day in Nairobi
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Pin className="h-4 w-4 text-field" />
+                Technicians based in town, Eastlands and Westlands
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="services" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">Our services</p>
-          <h2 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Pest control solutions built for real life.</h2>
+      {/* What we treat -------------------------------------------------- */}
+      <section className="wrap py-16 lg:py-24">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <SectionHead
+            title="What we get rid of"
+            lead="Every pest needs a different method. Pick yours to see how the treatment actually works and what it costs."
+          />
+          <Link href="/pricing" className="border-b-2 border-hazard pb-0.5 font-semibold text-ink">
+            See full price list
+          </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          {services.map((service, index) => (
-            <article
-              key={service.title}
-              className="group rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.04)] transition hover:-translate-y-1 hover:border-emerald-200 hover:shadow-[0_24px_60px_rgba(16,185,129,0.12)]"
-            >
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-100 to-lime-100 text-2xl shadow-inner shadow-emerald-200/60">
-                {index === 0 ? '🏠' : index === 1 ? '🏢' : index === 2 ? '🧼' : '🛡️'}
-              </div>
-              <div className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-emerald-700">{service.accent}</div>
-              <h3 className="text-xl font-bold text-slate-900">{service.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{service.description}</p>
-            </article>
-          ))}
+        <div className="mt-10 grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:grid-cols-4">
+          {services.map((s) => {
+            const Icon = pestIcons[s.icon];
+            return (
+              <Link
+                key={s.slug}
+                href={`/services/${s.slug}`}
+                className="group flex flex-col bg-paper p-6 transition-colors hover:bg-chalk"
+              >
+                <Icon className="h-9 w-9 text-field" />
+                <h3 className="mt-5 text-[1.18rem] text-ink">{s.name}</h3>
+                <p className="mt-2 text-[0.9rem] text-ink-soft">{s.short}</p>
+                <p className="mt-6 border-t border-rule pt-3 text-[0.9rem] font-semibold text-ink">
+                  From <Money value={s.from} />
+                </p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
-      <section id="why-us" className="bg-slate-950 py-20 text-white">
-        <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.98fr_1.02fr] lg:px-8">
+      {/* Guarantee band -------------------------------------------------- */}
+      <section className="bg-pine text-chalk">
+        <div className="tape" aria-hidden="true" />
+        <div className="wrap grid gap-12 py-16 lg:grid-cols-[1fr_0.9fr] lg:py-20">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-300">Why safeguard</p>
-            <h2 className="mt-4 text-3xl font-black sm:text-4xl">Trusted protection from the first inspection to long-term peace of mind.</h2>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
-              We combine proven fumigation methods, detailed inspection, and ongoing support to help clients maintain cleaner, safer spaces without stress.
+            <h2 className="text-[2rem] text-paper sm:text-[2.7rem]">
+              If they come back inside the warranty, we come back free.
+            </h2>
+            <p className="measure mt-5 text-[1.05rem] leading-[1.7] text-chalk/75">
+              Most people call us after somebody else sprayed the floor, took the money and
+              vanished. That is why every job here ends with a written warranty, a follow-up
+              visit already booked, and a service report you can show a landlord or a health
+              inspector.
             </p>
-
-            <div className="mt-8 space-y-4">
-              {features.map((feature) => (
-                <div key={feature} className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/20 text-lg text-emerald-300">✓</div>
-                  <span className="text-base font-medium text-slate-200">{feature}</span>
-                </div>
-              ))}
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/pricing" tone="hazard">
+                What it costs
+              </Button>
+              <Button href="/contact" tone="outline" className="border-chalk/40 text-chalk hover:bg-chalk hover:text-ink">
+                Book an inspection
+              </Button>
             </div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            <div className="rounded-[1.7rem] border border-white/10 bg-white/5 p-6">
-              <div className="text-4xl font-black text-emerald-300">90%</div>
-              <div className="mt-3 text-sm uppercase tracking-[0.18em] text-slate-300">Reduction in activity</div>
-              <p className="mt-4 text-sm leading-7 text-slate-300">Most clients report visible improvements within days of treatment and follow-through.</p>
-            </div>
-            <div className="rounded-[1.7rem] border border-white/10 bg-gradient-to-br from-emerald-500/20 to-lime-500/10 p-6">
-              <div className="text-4xl font-black text-lime-300">1 visit</div>
-              <div className="mt-3 text-sm uppercase tracking-[0.18em] text-slate-200">Fast treatment window</div>
-              <p className="mt-4 text-sm leading-7 text-slate-200">Our team works efficiently to minimize disruption to your routine or business operations.</p>
-            </div>
-            <div className="rounded-[1.7rem] border border-white/10 bg-white/5 p-6 sm:col-span-2">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <div className="text-sm uppercase tracking-[0.2em] text-emerald-200">Coverage</div>
-                  <div className="mt-2 text-2xl font-black text-white">Before & After</div>
-                </div>
-                <div className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-200">Action plan</div>
+          <dl className="grid grid-cols-2 gap-px self-start bg-chalk/15">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-pine p-6">
+                <dt className="display text-[1.9rem] text-hazard">{s.value}</dt>
+                <dd className="mt-2 text-[0.88rem] leading-snug text-chalk/70">{s.label}</dd>
               </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl bg-slate-900 p-4">
-                  <div className="text-xs uppercase tracking-[0.18em] text-slate-400">Before</div>
-                  <div className="mt-3 text-2xl font-black text-rose-300">High risk</div>
-                  <p className="mt-2 text-sm text-slate-300">Roach activity around bins, cracks, and plumbing.</p>
-                </div>
-                <div className="rounded-2xl bg-slate-900 p-4">
-                  <div className="text-xs uppercase tracking-[0.18em] text-slate-400">After</div>
-                  <div className="mt-3 text-2xl font-black text-emerald-300">Controlled</div>
-                  <p className="mt-2 text-sm text-slate-300">Targeted treatment plus prevention for lasting results.</p>
-                </div>
-              </div>
-            </div>
-          </div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      <section id="process" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">How it works</p>
-          <h2 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">A clear process for lasting results.</h2>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          {process.map((step, index) => (
-            <div key={step} className="relative rounded-[1.8rem] border border-emerald-100 bg-white p-7 shadow-[0_18px_50px_rgba(15,23,42,0.04)]">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-emerald-600 to-lime-500 text-lg font-black text-white shadow-lg shadow-emerald-600/20">
-                0{index + 1}
-              </div>
-              <h3 className="mt-5 text-xl font-bold text-slate-900">{index === 0 ? 'Inspect' : index === 1 ? 'Treat' : 'Protect'}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-600">{step}</p>
-            </div>
+      {/* Process --------------------------------------------------------- */}
+      <section className="wrap py-16 lg:py-24">
+        <SectionHead
+          title="How a visit works"
+          lead="Four steps, no surprises, and the price never changes once we are at your gate."
+        />
+        <ol className="mt-12 grid gap-px border-t border-rule md:grid-cols-4">
+          {steps.map((step, i) => (
+            <li key={step.title} className="border-b border-rule pt-6 md:border-b-0 md:pr-6">
+              <span className="display block text-[0.95rem] text-hazard">
+                Step {i + 1}
+              </span>
+              <h3 className="mt-2 text-[1.2rem]">{step.title}</h3>
+              <p className="mt-3 pb-6 text-[0.93rem] leading-[1.65] text-ink-soft">{step.body}</p>
+            </li>
           ))}
+        </ol>
+      </section>
+
+      {/* Prices ---------------------------------------------------------- */}
+      <section className="border-y border-rule bg-chalk-deep py-16 lg:py-24">
+        <div className="wrap">
+          <SectionHead
+            title="Prices you can check before you call"
+            lead="Residential treatment, all inclusive. Commercial work is quoted after a free site survey."
+          />
+
+          <div className="mt-10 overflow-x-auto border border-ink bg-paper">
+            <table className="w-full min-w-[540px] text-left">
+              <thead>
+                <tr className="border-b border-ink bg-ink text-chalk">
+                  <th className="px-5 py-4 text-[0.88rem] font-semibold">Size of space</th>
+                  <th className="px-5 py-4 text-[0.88rem] font-semibold">Cockroaches</th>
+                  <th className="px-5 py-4 text-[0.88rem] font-semibold">Bedbugs</th>
+                  <th className="px-5 py-4 text-[0.88rem] font-semibold">Full fumigation</th>
+                </tr>
+              </thead>
+              <tbody>
+                {priceTable.map((row) => (
+                  <tr key={row.space} className="border-b border-rule last:border-0">
+                    <td className="px-5 py-4 text-[0.95rem] font-medium">{row.space}</td>
+                    <td className="px-5 py-4 text-[0.95rem] tnum text-ink-soft">
+                      <Money value={row.cockroaches} />
+                    </td>
+                    <td className="px-5 py-4 text-[0.95rem] tnum text-ink-soft">
+                      <Money value={row.bedbugs} />
+                    </td>
+                    <td className="px-5 py-4 text-[0.95rem] tnum text-ink-soft">
+                      <Money value={row.general} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="mt-4 text-[0.9rem] text-ink-soft">
+            Includes inspection, treatment and one follow-up visit. {site.payment}
+          </p>
         </div>
       </section>
 
-      <section id="reviews" className="bg-[#eef8f0] py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">Client feedback</p>
-            <h2 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">What clients say about Safeguard.</h2>
+      {/* Areas ----------------------------------------------------------- */}
+      <section className="wrap py-16 lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionHead
+            title="Where we work"
+            lead="Nairobi and the towns around it. Outside this list, call and we will tell you honestly whether we can reach you."
+          />
+          <div>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3">
+              {areas.nairobi.map((a) => (
+                <li key={a} className="flex items-center gap-2 text-[0.95rem] text-ink">
+                  <span className="h-1.5 w-1.5 bg-hazard" aria-hidden="true" />
+                  {a}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 border-t border-rule pt-5 text-[0.95rem] text-ink-soft">
+              We also travel to {areas.beyond.join(', ')} for scheduled work and contracts.
+            </p>
           </div>
+        </div>
+      </section>
 
-          <div className="grid gap-6 lg:grid-cols-3">
-            {testimonials.map((item) => (
-              <div key={item.name} className="rounded-[1.8rem] border border-emerald-100 bg-white p-7 shadow-[0_18px_50px_rgba(15,23,42,0.04)]">
-                <div className="mb-5 text-3xl text-amber-400">★★★★★</div>
-                <p className="text-base leading-8 text-slate-600">“{item.quote}”</p>
-                <div className="mt-6 border-t border-slate-200 pt-4">
-                  <div className="font-bold text-slate-900">{item.name}</div>
-                  <div className="text-sm text-slate-500">{item.role}</div>
-                </div>
-              </div>
+      {/* Testimonials ---------------------------------------------------- */}
+      <section className="border-t border-rule bg-paper py-16 lg:py-24">
+        <div className="wrap">
+          <SectionHead title="What clients say after the follow-up visit" />
+          <div className="mt-10 grid gap-px border border-rule bg-rule lg:grid-cols-3">
+            {testimonials.map((t) => (
+              <figure key={t.name} className="flex flex-col justify-between bg-paper p-7">
+                <blockquote className="text-[1rem] leading-[1.7] text-ink">{t.quote}</blockquote>
+                <figcaption className="mt-6 border-t border-rule pt-4">
+                  <span className="block font-semibold text-ink">{t.name}</span>
+                  <span className="block text-[0.88rem] text-ink-soft">{t.role}</span>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">Simple pricing</p>
-          <h2 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">Flexible packages to fit every property.</h2>
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3">
-          {packages.map((pkg) => (
-            <div
-              key={pkg.name}
-              className={`rounded-[1.9rem] border p-7 shadow-[0_18px_50px_rgba(15,23,42,0.04)] ${
-                pkg.featured
-                  ? 'border-emerald-300 bg-[linear-gradient(180deg,_rgba(16,185,129,0.08),_rgba(255,255,255,1))] shadow-[0_24px_80px_rgba(16,185,129,0.18)]'
-                  : 'border-slate-200 bg-white'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div className="text-xl font-bold text-slate-900">{pkg.name}</div>
-                {pkg.featured ? (
-                  <span className="rounded-full bg-emerald-600 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white">Popular</span>
-                ) : null}
-              </div>
-
-              <div className="mt-6 flex items-end gap-2">
-                <span className="text-4xl font-black text-slate-900">{pkg.price}</span>
-                <span className="pb-1 text-sm text-slate-500">/ visit</span>
-              </div>
-
-              <p className="mt-4 text-sm leading-7 text-slate-600">{pkg.description}</p>
-
-              <ul className="mt-6 space-y-3">
-                {pkg.perks.map((perk) => (
-                  <li key={perk} className="flex items-center gap-3 text-sm text-slate-700">
-                    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100 text-xs font-black text-emerald-700">✓</span>
-                    {perk}
-                  </li>
-                ))}
-              </ul>
-
-              <Link href="/pricing" className={`mt-8 inline-flex w-full justify-center rounded-full px-5 py-3 text-sm font-semibold transition ${pkg.featured ? 'bg-gradient-to-r from-emerald-600 to-lime-500 text-white shadow-lg shadow-emerald-600/20 hover:scale-[1.01]' : 'border border-slate-300 bg-white text-slate-800 hover:border-emerald-300 hover:text-emerald-700'}`}>
-                Choose package
-              </Link>
-            </div>
-          ))}
+      {/* FAQ ------------------------------------------------------------- */}
+      <section className="wrap py-16 lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionHead
+            title="Questions people ask before booking"
+            lead="If yours is not here, ask on WhatsApp. A technician answers, not a bot."
+          />
+          <Faq />
         </div>
       </section>
 
-      <section id="contact" className="bg-slate-950 py-20 text-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.18),_transparent_35%),_linear-gradient(135deg,_rgba(15,23,42,0.96),_rgba(12,74,110,0.85))] p-8 shadow-[0_40px_100px_rgba(15,23,42,0.35)] lg:p-12">
-            <div className="grid gap-10 lg:grid-cols-[1fr_0.8fr]">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-300">Need help now?</p>
-                <h2 className="mt-4 max-w-xl text-3xl font-black sm:text-4xl">Protect your home or business before the problem gets worse.</h2>
-                <p className="mt-4 max-w-lg text-base leading-8 text-slate-200">
-                  Our team is ready to inspect, discuss your risks, and recommend the right treatment plan for your space.
-                </p>
-              </div>
-
-              <div className="rounded-[1.6rem] border border-white/10 bg-white/5 p-6 backdrop-blur-md">
-                <div className="text-sm uppercase tracking-[0.2em] text-emerald-300">Call us</div>
-                <div className="mt-4 text-3xl font-black text-white">+1 (800) 555-0148</div>
-                <div className="mt-5 space-y-4 text-sm text-slate-200">
-                  <div>Mon–Sat: 7:00 AM – 8:00 PM</div>
-                  <div>support@safeguardfumigation.com</div>
-                  <div>24/7 emergency support available</div>
-                </div>
-                <Link href="/contact" className="mt-6 inline-flex w-full justify-center rounded-full bg-gradient-to-r from-emerald-500 to-lime-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/20">
-                  Request a callback
-                </Link>
-              </div>
-            </div>
+      {/* Closing CTA ------------------------------------------------------ */}
+      <section className="bg-ink text-chalk">
+        <div className="tape" aria-hidden="true" />
+        <div className="wrap flex flex-col items-start gap-8 py-16 lg:flex-row lg:items-center lg:justify-between lg:py-20">
+          <div>
+            <h2 className="text-[2rem] text-paper sm:text-[2.6rem]">
+              The longer you wait, the more they breed.
+            </h2>
+            <p className="measure mt-4 text-[1.05rem] leading-[1.6] text-chalk/70">
+              One call, a fixed price, and a technician at your door today.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a
+              href={site.phoneHref}
+              className="display rounded-xs border border-hazard bg-hazard px-7 py-4 text-[1.3rem] text-ink"
+            >
+              {site.phoneDisplay}
+            </a>
+            <WhatsAppButton
+              tone="outline"
+              className="border-chalk/40 text-chalk hover:bg-chalk hover:text-ink"
+              label="Chat on WhatsApp"
+            />
           </div>
         </div>
       </section>

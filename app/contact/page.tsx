@@ -1,129 +1,108 @@
-'use client';
+import type { Metadata } from 'next';
+import SiteShell from '@/components/site-shell';
+import QuoteForm from '@/components/quote-form';
+import Faq from '@/components/faq';
+import { SectionHead } from '@/components/ui';
+import { Clock, Mail, Phone, Pin, WhatsApp } from '@/components/icons';
+import { areas, faqs, site, waLink } from '@/lib/site';
 
-import { FormEvent, useState } from 'react';
-import SiteShell from '../components/site-shell';
+export const metadata: Metadata = {
+  title: 'Book a fumigation visit in Nairobi',
+  description:
+    'Book cockroach, bedbug, rodent or termite treatment in Nairobi. Call 0746 378 772, WhatsApp us, or request a call back and we quote a fixed price.',
+};
 
 export default function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    const payload = Object.fromEntries(formData.entries());
-    console.log('Safeguard form submission:', payload);
-    setSubmitted(true);
-    form.reset();
-  }
-
   return (
     <SiteShell>
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <section className="border-b border-rule">
+        <div className="wrap grid gap-12 py-14 lg:grid-cols-[0.95fr_1.05fr] lg:py-20">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-emerald-700">Contact</p>
-            <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">Book a fumigation inspection or request a quote today.</h1>
-            <p className="mt-5 text-lg leading-8 text-slate-600">
-              We’re ready to help with residential, commercial, and preventive pest control needs. Reach out and we’ll guide you to the right service plan.
+            <h1 className="text-[2.5rem] leading-[1.02] sm:text-[3.2rem]">
+              Tell us what you are seeing and we will handle it.
+            </h1>
+            <p className="measure mt-5 text-[1.05rem] leading-[1.7] text-ink-soft">
+              Calling is fastest. If you are at work or in a meeting, leave your details and a
+              technician rings you back with a fixed price.
             </p>
 
-            <div className="mt-8 space-y-5 text-base text-slate-700">
-              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="text-xs uppercase tracking-[0.2em] text-emerald-700">Call</div>
-                <div className="mt-2 font-bold text-slate-900">+1 (800) 555-0148</div>
+            <div className="mt-8 grid gap-px border border-ink bg-rule">
+              <a href={site.phoneHref} className="flex items-center gap-4 bg-paper p-5 transition-colors hover:bg-chalk">
+                <Phone className="h-6 w-6 text-field" />
+                <span>
+                  <span className="block text-[0.82rem] text-ink-soft">Call us</span>
+                  <span className="display block text-[1.4rem]">{site.phoneDisplay}</span>
+                </span>
+              </a>
+              <a
+                href={waLink('Hi Safeguard, I need a fumigation quote.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 bg-paper p-5 transition-colors hover:bg-chalk"
+              >
+                <WhatsApp className="h-6 w-6 text-field" />
+                <span>
+                  <span className="block text-[0.82rem] text-ink-soft">WhatsApp, photos welcome</span>
+                  <span className="display block text-[1.4rem]">{site.phoneDisplay}</span>
+                </span>
+              </a>
+              <a href={`mailto:${site.email}`} className="flex items-center gap-4 bg-paper p-5 transition-colors hover:bg-chalk">
+                <Mail className="h-6 w-6 text-field" />
+                <span>
+                  <span className="block text-[0.82rem] text-ink-soft">Email, for written quotes</span>
+                  <span className="block text-[1.05rem] font-semibold">{site.email}</span>
+                </span>
+              </a>
+              <div className="flex items-center gap-4 bg-paper p-5">
+                <Clock className="h-6 w-6 text-field" />
+                <span>
+                  <span className="block text-[0.82rem] text-ink-soft">Working hours</span>
+                  <span className="block text-[1rem] font-medium">{site.hoursWeek}</span>
+                  <span className="block text-[0.9rem] text-ink-soft">{site.hoursSunday}</span>
+                </span>
               </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="text-xs uppercase tracking-[0.2em] text-emerald-700">Email</div>
-                <div className="mt-2 font-bold text-slate-900">support@safeguardfumigation.com</div>
-              </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                <div className="text-xs uppercase tracking-[0.2em] text-emerald-700">Hours</div>
-                <div className="mt-2 font-bold text-slate-900">Mon–Sat: 7:00 AM – 8:00 PM</div>
+              <div className="flex items-center gap-4 bg-paper p-5">
+                <Pin className="h-6 w-6 text-field" />
+                <span>
+                  <span className="block text-[0.82rem] text-ink-soft">Where we come from</span>
+                  <span className="block text-[1rem] font-medium">
+                    Nairobi, with technicians in Westlands, town and Eastlands
+                  </span>
+                </span>
               </div>
             </div>
           </div>
 
-          <div className="rounded-[1.8rem] border border-slate-200 bg-white p-6 shadow-[0_18px_50px_rgba(15,23,42,0.04)] sm:p-8">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid gap-5 sm:grid-cols-2">
-                <label className="block text-sm font-medium text-slate-700">
-                  Full name
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-400 focus:bg-white"
-                    placeholder="Your name"
-                  />
-                </label>
+          <QuoteForm />
+        </div>
+      </section>
 
-                <label className="block text-sm font-medium text-slate-700">
-                  Phone number
-                  <input
-                    type="tel"
-                    name="phone"
-                    required
-                    className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-400 focus:bg-white"
-                    placeholder="(000) 000-0000"
-                  />
-                </label>
-              </div>
-
-              <label className="block text-sm font-medium text-slate-700">
-                Email address
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-400 focus:bg-white"
-                  placeholder="you@example.com"
-                />
-              </label>
-
-              <label className="block text-sm font-medium text-slate-700">
-                Service needed
-                <select
-                  name="service"
-                  required
-                  className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-400 focus:bg-white"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Select a service
-                  </option>
-                  <option value="Residential Fumigation">Residential Fumigation</option>
-                  <option value="Commercial Pest Control">Commercial Pest Control</option>
-                  <option value="Deep Cleaning & Prevention">Deep Cleaning & Prevention</option>
-                  <option value="Maintenance Packages">Maintenance Packages</option>
-                </select>
-              </label>
-
-              <label className="block text-sm font-medium text-slate-700">
-                Property details
-                <textarea
-                  name="details"
-                  rows={5}
-                  required
-                  className="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-emerald-400 focus:bg-white"
-                  placeholder="Tell us about your property, issue, and preferred visit time."
-                />
-              </label>
-
-              <button
-                type="submit"
-                className="w-full rounded-full bg-gradient-to-r from-emerald-600 to-lime-500 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-emerald-600/25 transition hover:scale-[1.01]"
-              >
-                Request consultation
-              </button>
-
-              {submitted ? (
-                <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700">
-                  Your request has been sent successfully. Our team will contact you shortly.
-                </div>
-              ) : null}
-            </form>
+      <section className="wrap py-14 lg:py-20">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionHead
+            title="Areas we cover"
+            lead="Same-day visits across Nairobi. Scheduled visits to the towns around it."
+          />
+          <div>
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3">
+              {areas.nairobi.map((a) => (
+                <li key={a} className="flex items-center gap-2 text-[0.95rem]">
+                  <span className="h-1.5 w-1.5 bg-hazard" aria-hidden="true" />
+                  {a}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 border-t border-rule pt-5 text-[0.95rem] text-ink-soft">
+              Also serving {areas.beyond.join(', ')}.
+            </p>
           </div>
+        </div>
+      </section>
+
+      <section className="border-t border-rule bg-paper py-14 lg:py-20">
+        <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionHead title="Before you book" />
+          <Faq items={faqs.slice(0, 4)} />
         </div>
       </section>
     </SiteShell>
